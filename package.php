@@ -7,7 +7,7 @@ $lead          = 'Michael Gauthier';
 $leadUser      = 'gauthierm';
 $leadEmail     = 'mike@silverorange.com';
 $date          = date('Y-m-d');
-$version       = '1.1.1so1';
+$version       = '1.1.1so2';
 $stability     = 'stable';
 $license       = 'Authorize.net SDK License Agreement (included)';
 $notes         = 'Pear package of provided SDK.';
@@ -68,7 +68,7 @@ $installList = '';
 foreach ($directory as $path) {
 	$basePath = trim(substr($path, strlen($rootDir)), '/');
 
-	if (preg_match('#/.#', $basePath) === 1) {
+	if (preg_match('#/\.#', $basePath) === 1) {
 		continue;
 	}
 
