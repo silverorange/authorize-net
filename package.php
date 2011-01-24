@@ -7,7 +7,7 @@ $lead          = 'Michael Gauthier';
 $leadUser      = 'gauthierm';
 $leadEmail     = 'mike@silverorange.com';
 $date          = date('Y-m-d');
-$version       = '1.1.1';
+$version       = '1.1.1so1';
 $stability     = 'stable';
 $license       = 'Authorize.net SDK License Agreement (included)';
 $notes         = 'Pear package of provided SDK.';
@@ -24,7 +24,7 @@ function parsePath($fullPath, $role, $fileMatch = '/^(.*)$/', $padding = 3)
 	$fileList = '';
 
 	$file = basename($fullPath);
-	if (is_dir($fullPath)) {
+	if (is_dir($fullPath) && substr(basename($fullPath), 0, 1) !== '.') {
 		$fileList .= str_repeat("\t", $padding) . "<dir name=\"{$file}\">\n";
 		foreach (scandir($fullPath) as $subPath) {
 			if ($subPath === '.' || $subPath === '..') {
@@ -50,7 +50,8 @@ function parsePath($fullPath, $role, $fileMatch = '/^(.*)$/', $padding = 3)
 }
 
 $rootDir = realpath(dirname(__FILE__) . '/');
-$fileList  = parsePath($rootDir . '/lib', 'php', '/^(.*)(\.php|\.pem|README)$/');
+$fileList  = parsePath($rootDir . '/AuthorizeNet.php', 'php');
+$fileList .= parsePath($rootDir . '/lib', 'php', '/^(.*)(\.php|\.pem|README)$/');
 $fileList .= parsePath($rootDir . '/doc', 'doc');
 $fileList .= parsePath($rootDir . '/tests', 'test', '/^(.*)\.(php|xml)$/');
 $fileList .= parsePath($rootDir . '/README', 'doc');
@@ -66,6 +67,10 @@ $directory = new RecursiveIteratorIterator(
 $installList = '';
 foreach ($directory as $path) {
 	$basePath = trim(substr($path, strlen($rootDir)), '/');
+
+	if (preg_match('#/.#', $basePath) === 1) {
+		continue;
+	}
 
 	// This just takes the 'lib/' off every path name, so it will be
 	// installed in the correct location
