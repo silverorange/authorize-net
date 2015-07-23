@@ -13,10 +13,10 @@ payments.</description>
 		<email>mike@silverorange.com</email>
 		<active>true</active>
 	</lead>
-	<date>2015-04-16</date>
+	<date>2015-07-23</date>
 	<version>
-		<release>1.1.1so4</release>
-		<api>1.1.1so4</api>
+		<release>1.1.1so5</release>
+		<api>1.1.1so5</api>
 	</version>
 	<stability>
 		<release>stable</release>
